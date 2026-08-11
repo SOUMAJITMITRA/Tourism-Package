@@ -4,7 +4,7 @@ import os
 from sklearn.model_selection import train_test_split
 
 # Define constants for dataset path
-DATASET_PATH = "data/tourism.csv"
+DATASET_PATH = "tourism_project/data/tourism.csv"
 
 # Load dataset
 df = pd.read_csv(DATASET_PATH)
