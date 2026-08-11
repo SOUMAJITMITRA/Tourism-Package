@@ -1,7 +1,7 @@
 import pandas as pd
 import sys
 
-DATA_PATH = "data/tourism.csv"
+DATA_PATH = "tourism_project/data/tourism.csv"
 
 EXPECTED_COLUMNS = [
     "CustomerID", "ProdTaken", "Age", "TypeofContact", "CityTier",
