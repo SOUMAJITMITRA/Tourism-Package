@@ -3,22 +3,18 @@ import pandas as pd
 import joblib
 import os
 
-# Path to the saved model
 MODEL_PATH = "tourism_project/deployment/best_model.pkl"
 
-# Load model
 if os.path.exists(MODEL_PATH):
     model = joblib.load(MODEL_PATH)
     st.success("✅ Model loaded successfully.")
 else:
-    st.error("❌ Model file not found. Please ensure the pipeline has committed the trained model.")
+    st.error("❌ Model file not found.")
     st.stop()
 
 st.title("Wellness Tourism Package Purchase Prediction")
+st.write("Fill in the customer details below:")
 
-st.write("Fill in the customer details below to predict whether they are likely to purchase the package.")
-
-# Collect user inputs
 age = st.number_input("Age", min_value=18, max_value=100, value=30)
 typeof_contact = st.selectbox("Type of Contact", ["Company Invited", "Self Inquiry"])
 city_tier = st.selectbox("City Tier", [1, 2, 3])
@@ -38,7 +34,6 @@ product_pitched = st.text_input("Product Pitched", "Basic")
 num_followups = st.number_input("Number of Followups", min_value=0, max_value=10, value=1)
 duration_pitch = st.number_input("Duration of Pitch (minutes)", min_value=1, max_value=60, value=10)
 
-# Create DataFrame for prediction
 input_data = pd.DataFrame({
     "Age": [age],
     "TypeofContact": [typeof_contact],
@@ -60,12 +55,11 @@ input_data = pd.DataFrame({
     "DurationOfPitch": [duration_pitch]
 })
 
-# Predict
 if st.button("Predict"):
     prediction = model.predict(input_data)[0]
     probability = model.predict_proba(input_data)[0][1]
 
     if prediction == 1:
-        st.success(f"🎉 Customer is likely to purchase the Wellness Tourism Package (probability: {probability:.2f})")
+        st.success(f"🎉 Customer is likely to purchase (probability: {probability:.2f})")
     else:
-        st.warning(f"🙁 Customer is unlikely to purchase the package (probability: {probability:.2f})")
+        st.warning(f"🙁 Customer is unlikely to purchase (probability: {probability:.2f})")
