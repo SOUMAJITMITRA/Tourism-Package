@@ -22,6 +22,8 @@ Xtest = pd.read_csv(Xtest_path)
 ytrain = pd.read_csv(ytrain_path).squeeze()
 ytest = pd.read_csv(ytest_path).squeeze()
 
+print(Xtrain.columns.tolist())
+
 print("✅ Train and test splits loaded.")
 
 # Identify categorical columns
