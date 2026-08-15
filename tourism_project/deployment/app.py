@@ -55,6 +55,19 @@ input_data = pd.DataFrame({
     "DurationOfPitch": [duration_pitch]
 })
 
+st.write("### DEBUG - Model Features")
+st.write("Model expects:")
+st.write(list(model.feature_names_in_))
+
+st.write("App provides:")
+st.write(list(input_data.columns))
+
+st.write("Missing from app:")
+st.write(list(set(model.feature_names_in_) - set(input_data.columns)))
+
+st.write("Extra in app:")
+st.write(list(set(input_data.columns) - set(model.feature_names_in_)))
+
 if st.button("Predict"):
     prediction = model.predict(input_data)[0]
     probability = model.predict_proba(input_data)[0][1]
