@@ -9,7 +9,7 @@ print("✅ Dataset loaded successfully.")
 DROP_COLUMNS = ["CustomerID"]
 
 
-df_clean = df
+df_clean = df.drop(columns=DROP_COLUMNS)
 print(f"🧹 Cleaned dataset shape: {df_clean.shape}")
 
 target = "ProdTaken"
