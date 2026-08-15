@@ -12,7 +12,7 @@ else:
     st.error("❌ Model file not found.")
     st.stop()
 
-st.title("Wellness Tourism Package Purchase Prediction")
+st.title("Wellness Tourism Package Purchase Prediction v2")
 st.write("Fill in the customer details below:")
 
 age = st.number_input("Age", min_value=18, max_value=100, value=30)
