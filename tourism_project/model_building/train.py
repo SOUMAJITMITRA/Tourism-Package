@@ -10,10 +10,10 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 import joblib
 
-Xtrain = pd.read_csv("Xtrain.csv")
-Xtest = pd.read_csv("Xtest.csv")
-ytrain = pd.read_csv("ytrain.csv").squeeze()
-ytest = pd.read_csv("ytest.csv").squeeze()
+Xtrain = pd.read_csv("tourism_project/model_building/Xtrain.csv")
+Xtest = pd.read_csv("tourism_project/model_building/Xtest.csv")
+ytrain = pd.read_csv("tourism_project/model_building/ytrain.csv").squeeze()
+ytest = pd.read_csv("tourism_project/model_building/ytest.csv").squeeze()
 
 print("✅ Train and test splits loaded.")
 
