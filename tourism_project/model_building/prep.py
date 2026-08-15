@@ -8,7 +8,7 @@ print("✅ Dataset loaded successfully.")
 
 #DROP_COLUMNS = ["CustomerID"]
 
-DROP_COLUMNS = ["CustomerID", "Unnamed: 0"]
+#DROP_COLUMNS = ["CustomerID", "Unnamed: 0"]
 df_clean = df.drop(columns=DROP_COLUMNS, errors="ignore")
 print(f"🧹 Cleaned dataset shape: {df_clean.shape}")
 
