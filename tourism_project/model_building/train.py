@@ -24,7 +24,9 @@ preprocessor = ColumnTransformer(
     remainder="passthrough"
 )
 
-model = RandomForestClassifier(random_state=42)
+# Add class_weight="balanced" here
+model = RandomForestClassifier(random_state=42, class_weight="balanced")
+
 pipeline = Pipeline(steps=[("preprocessor", preprocessor),
                            ("classifier", model)])
 
