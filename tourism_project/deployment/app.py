@@ -9,10 +9,10 @@ if os.path.exists(MODEL_PATH):
     model = joblib.load(MODEL_PATH)
     st.success("Model loaded successfully.")
 else:
-    st.error(" Model file not found.")
+    st.error("Model file not found.")
     st.stop()
 
-st.title("Wellness Tourism Package Purchase Prediction v3")
+st.title("Wellness Tourism Package Purchase Prediction v5")
 st.write("Fill in the customer details below:")
 
 # Numeric inputs
@@ -21,13 +21,18 @@ city_tier = st.selectbox("City Tier", [1, 2, 3])
 num_person_visiting = st.number_input("Number of Persons Visiting", min_value=1, max_value=10, value=1)
 preferred_property_star = st.selectbox("Preferred Property Star", [3, 4, 5])
 num_trips = st.number_input("Number of Trips per Year", min_value=0, max_value=20, value=1)
-passport = st.selectbox("Passport", [0, 1])
-own_car = st.selectbox("Own Car", [0, 1])
 num_children_visiting = st.number_input("Number of Children Visiting", min_value=0, max_value=5, value=0)
 monthly_income = st.number_input("Monthly Income", min_value=0, value=50000)
 pitch_score = st.slider("Pitch Satisfaction Score", min_value=1, max_value=5, value=3)
 num_followups = st.number_input("Number of Followups", min_value=0, max_value=10, value=1)
 duration_pitch = st.number_input("Duration of Pitch (minutes)", min_value=1, max_value=60, value=10)
+
+# Binary inputs with Yes/No mapping
+passport_option = st.selectbox("Passport", ["No", "Yes"])
+passport = 1 if passport_option == "Yes" else 0
+
+own_car_option = st.selectbox("Own Car", ["No", "Yes"])
+own_car = 1 if own_car_option == "Yes" else 0
 
 # Categorical dropdowns (aligned with dataset)
 typeof_contact = st.selectbox("Type of Contact", ["Company Invited", "Self Inquiry"])
