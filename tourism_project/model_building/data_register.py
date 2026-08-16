@@ -15,21 +15,21 @@ EXPECTED_COLUMNS = [
 def main():
     try:
         df = pd.read_csv(DATA_PATH)
-        print("✅ Dataset loaded successfully.")
+        print("Dataset loaded successfully.")
     except FileNotFoundError:
-        print(f"❌ Dataset not found at {DATA_PATH}")
+        print(f"Dataset not found at {DATA_PATH}")
         sys.exit(1)
 
     missing_cols = [col for col in EXPECTED_COLUMNS if col not in df.columns]
     extra_cols = [col for col in df.columns if col not in EXPECTED_COLUMNS]
 
     if missing_cols:
-        print("⚠️ Missing columns:", missing_cols)
+        print("Missing columns:", missing_cols)
     else:
-        print("✅ All expected columns are present.")
+        print("All expected columns are present.")
 
     if extra_cols:
-        print("ℹ️ Extra columns found:", extra_cols)
+        print("Extra columns found:", extra_cols)
 
     print("\n--- Dataset Summary ---")
     print(f"Rows: {df.shape[0]}, Columns: {df.shape[1]}")
