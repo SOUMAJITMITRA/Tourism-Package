@@ -7,9 +7,9 @@ MODEL_PATH = "tourism_project/deployment/best_model.pkl"
 
 if os.path.exists(MODEL_PATH):
     model = joblib.load(MODEL_PATH)
-    st.success("✅ Model loaded successfully.")
+    st.success("Model loaded successfully.")
 else:
-    st.error("❌ Model file not found.")
+    st.error("Model file not found.")
     st.stop()
 
 st.title("Wellness Tourism Package Purchase Prediction v2")
@@ -55,18 +55,6 @@ input_data = pd.DataFrame({
     "DurationOfPitch": [duration_pitch]
 })
 
-st.write("### DEBUG - Model Features")
-st.write("Model expects:")
-st.write(list(model.feature_names_in_))
-
-st.write("App provides:")
-st.write(list(input_data.columns))
-
-st.write("Missing from app:")
-st.write(list(set(model.feature_names_in_) - set(input_data.columns)))
-
-st.write("Extra in app:")
-st.write(list(set(input_data.columns) - set(model.feature_names_in_)))
 
 if st.button("Predict"):
     prediction = model.predict(input_data)[0]
