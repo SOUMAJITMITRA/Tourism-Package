@@ -4,13 +4,13 @@ from sklearn.model_selection import train_test_split
 DATASET_PATH = "tourism_project/data/tourism.csv"
 
 df = pd.read_csv(DATASET_PATH)
-print("✅ Dataset loaded successfully.")
+print("Dataset loaded successfully.")
 
 DROP_COLUMNS = ["CustomerID", "Unnamed: 0"]
 
 
 df_clean = df.drop(columns=DROP_COLUMNS)
-print(f"🧹 Cleaned dataset shape: {df_clean.shape}")
+print(f"Cleaned dataset shape: {df_clean.shape}")
 
 target = "ProdTaken"
 
