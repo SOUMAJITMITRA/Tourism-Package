@@ -3,8 +3,10 @@ import pandas as pd
 import joblib
 import os
 
+# Path to the trained model file
 MODEL_PATH = "tourism_project/deployment/best_model.pkl"
 
+# Load the trained model if it exists, otherwise stop execution
 if os.path.exists(MODEL_PATH):
     model = joblib.load(MODEL_PATH)
     st.success("Model loaded successfully.")
@@ -12,10 +14,13 @@ else:
     st.error("Model file not found.")
     st.stop()
 
-st.title("Wellness Tourism Package Purchase Prediction v5")
+# Application title and description
+st.title("Wellness Tourism Package Purchase Prediction")
 st.write("Fill in the customer details below:")
 
-# Numeric inputs
+# -----------------------------
+# Collect numeric inputs from the user
+# -----------------------------
 age = st.number_input("Age", min_value=18, max_value=100, value=30)
 city_tier = st.selectbox("City Tier", [1, 2, 3])
 num_person_visiting = st.number_input("Number of Persons Visiting", min_value=1, max_value=10, value=1)
@@ -27,14 +32,18 @@ pitch_score = st.slider("Pitch Satisfaction Score", min_value=1, max_value=5, va
 num_followups = st.number_input("Number of Followups", min_value=0, max_value=10, value=1)
 duration_pitch = st.number_input("Duration of Pitch (minutes)", min_value=1, max_value=60, value=10)
 
-# Binary inputs with Yes/No mapping
+# -----------------------------
+# Collect binary inputs (Yes/No mapped to 1/0)
+# -----------------------------
 passport_option = st.selectbox("Passport", ["No", "Yes"])
 passport = 1 if passport_option == "Yes" else 0
 
 own_car_option = st.selectbox("Own Car", ["No", "Yes"])
 own_car = 1 if own_car_option == "Yes" else 0
 
-# Categorical dropdowns (aligned with dataset)
+# -----------------------------
+# Collect categorical inputs (dropdowns aligned with dataset categories)
+# -----------------------------
 typeof_contact = st.selectbox("Type of Contact", ["Company Invited", "Self Inquiry"])
 occupation = st.selectbox("Occupation", ["Salaried", "Free Lancer", "Small Business", "Large Business"])
 gender = st.selectbox("Gender", ["Male", "Female"])
@@ -42,7 +51,10 @@ marital_status = st.selectbox("Marital Status", ["Single", "Married", "Divorced"
 designation = st.selectbox("Designation", ["Manager", "Executive", "Senior Manager", "AVP", "VP"])
 product_pitched = st.selectbox("Product Pitched", ["Basic", "Deluxe", "Standard", "Super Deluxe", "King"])
 
-# Build input DataFrame with explicit casting
+# -----------------------------
+# Build input DataFrame for prediction
+# Explicit casting ensures correct data types
+# -----------------------------
 input_data = pd.DataFrame({
     "Age": [int(age)],
     "TypeofContact": [str(typeof_contact)],
@@ -64,10 +76,15 @@ input_data = pd.DataFrame({
     "DurationOfPitch": [int(duration_pitch)]
 })
 
+# -----------------------------
+# Prediction logic
+# -----------------------------
 if st.button("Predict"):
+    # Generate prediction and probability from the trained model
     prediction = model.predict(input_data)[0]
     probability = model.predict_proba(input_data)[0][1]
 
+    # Display result based on prediction
     if prediction == 1:
         st.success(f"Customer is likely to purchase (probability: {probability:.2f})")
     else:
