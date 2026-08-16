@@ -15,7 +15,7 @@ Xtest = pd.read_csv("Xtest.csv")
 ytrain = pd.read_csv("ytrain.csv").squeeze()
 ytest = pd.read_csv("ytest.csv").squeeze()
 
-print("✅ Train and test splits loaded.")
+print("Train and test splits loaded.")
 
 categorical_cols = Xtrain.select_dtypes(include=["object"]).columns
 
@@ -54,7 +54,7 @@ with mlflow.start_run():
     mlflow.log_metric("f1_score", f1)
     mlflow.log_metric("roc_auc", roc_auc)
 
-    print(f"📊 Accuracy: {acc:.4f}, F1: {f1:.4f}, ROC-AUC: {roc_auc:.4f}")
+    print(f"Accuracy: {acc:.4f}, F1: {f1:.4f}, ROC-AUC: {roc_auc:.4f}")
 
     deployment_dir = "tourism_project/deployment"
     os.makedirs(deployment_dir, exist_ok=True)
@@ -62,4 +62,4 @@ with mlflow.start_run():
 
     mlflow.sklearn.log_model(best_model, "model")
 
-    print("💾 Best model saved to tourism_project/deployment/best_model.pkl")
+    print("Best model saved to tourism_project/deployment/best_model.pkl")
